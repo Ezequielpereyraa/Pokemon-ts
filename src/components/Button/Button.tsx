@@ -1,6 +1,6 @@
 interface IProps {
  textButton: string,
- onClick: () => void
+ onClick?: () => void
 }
 const Button = ({ textButton, onClick }: IProps) => {
  return (

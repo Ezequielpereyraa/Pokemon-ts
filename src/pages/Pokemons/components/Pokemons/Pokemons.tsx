@@ -1,13 +1,17 @@
 import { IPokemon } from "@/models"
 import Text from "@/components/Text"
+import { useSelector } from "react-redux"
+import { RootState } from "../../../../redux/store"
 
 interface IProps {
- pokemons: IPokemon[],
- selectedPokemon: (name: string) => boolean,
  fetchPokemon: ({ url, pokemonSelect }: { url?: string, pokemonSelect?: IPokemon }) => void
 }
 
-const Pokemons = ({ pokemons, fetchPokemon, selectedPokemon }: IProps) => {
+const Pokemons = ({ fetchPokemon }: IProps) => {
+ const pokemons = useSelector((state: RootState) => state.pokemons.pokemons)
+ const pokemon = useSelector((state: RootState) => state.pokemons.pokemon)
+
+ const selectedPokemon = (name: string) => name === pokemon?.name
 
  const stylesSelected = (name: string) => {
   if (!selectedPokemon(name)) return {};

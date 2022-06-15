@@ -2,12 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { pokemonAdapters } from "@/adapters";
 import { IPokemons, IPokemon } from "@/models";
+import { useDispatch, useSelector } from "react-redux";
+import { getPokemon, getPokemons } from "../redux/pokemonSlice";
 
 const useFechtPokemons = () => {
- const [pokemons, setPokemons] = useState<IPokemons>([]);
  const [loading, setLoading] = useState(false)
  const [pokemon, setPokemon] = useState<IPokemon | null>(null);
- const [page, setPage] = useState(0);
+ const dispatch = useDispatch()
+ const page = useSelector(state => state.pokemons.page)
 
  const fetchPokemons = async () => {
   const { data: { results } } = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${page}0&limit=9`);
@@ -15,7 +17,7 @@ const useFechtPokemons = () => {
    const { data } = await axios.get(pokemon.url);
    return pokemonAdapters(data);
   }));
-  setPokemons(pokemons);
+  dispatch(getPokemons(pokemons));
  }
 
 
@@ -26,19 +28,20 @@ const useFechtPokemons = () => {
    if (!url && Object.entries(pokemonSelect).length) {
     return setTimeout(() => {
      setPokemon(pokemonSelect)
+     dispatch(getPokemon(pokemonSelect))
      setLoading(false)
     }, 900)
    };
    const { data } = await axios.get(url);
    setTimeout(() => {
-    setPokemon(pokemonAdapters(data))
+    dispatch(getPokemon(pokemonAdapters(data)))
     setLoading(false)
    }, 800)
   } catch (error) {
-   setPokemon({
+   dispatch(getPokemon({
     name: "Not! pokemon",
     sprites: "https://i.pinimg.com/originals/b2/08/63/b2086351a03ed48cea85f1e4b468024b.gif"
-   })
+   }))
    setLoading(false)
   }
  }
@@ -52,10 +55,7 @@ const useFechtPokemons = () => {
 
  return {
   loading,
-  pokemons,
   pokemon,
-  page,
-  setPage,
   setLoading,
   fetchDataPokemon
  }

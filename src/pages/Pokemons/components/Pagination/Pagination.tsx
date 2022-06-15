@@ -1,18 +1,21 @@
 import Button from "@/components/Button"
 import Text from "@/components/Text"
+import { useDispatch, useSelector } from "react-redux"
+import { decrementPage, incrementPage } from "@/redux/pokemonSlice"
 
-interface IProps {
- page: number
- setPage: Function
+
+const Pagination = () => {
+ const dispatch = useDispatch()
+ const page = useSelector(state => state.pokemons.page)
+
+ return (
+  <div className="flex justify-center my-5">
+   <Button textButton='Prev' onClick={() => dispatch(decrementPage())} />
+   <Text className='text-2xl my-2 mx-4' text={page === 0 ? '1' : page + 1} />
+   <Button textButton='Next' onClick={() => dispatch(incrementPage())} />
+  </div>
+ )
 }
-
-const Pagination = ({ setPage, page }: IProps) => (
- <div className="flex justify-center">
-  <Button textButton='Prev' onClick={() => setPage(page - 1)} />
-  <Text className='text-2xl my-2 mx-4' text={page === 0 ? '1' : page + 1} />
-  <Button textButton='Next' onClick={() => setPage(page + 1)} />
- </div>
-)
 
 
 export default Pagination

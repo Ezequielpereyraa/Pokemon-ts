@@ -1,13 +1,16 @@
 import Text from '@/components/Text'
 import Loader from '@/components/Loader'
-import { IPokemon } from '@/models'
+import { useDispatch, useSelector } from 'react-redux'
+import Button from '../../../../components/Button'
+import { addPokemonFavorite } from '../../../../redux/pokemonFavoriteSlice'
 
 interface IProps {
  loading: boolean,
- pokemon: IPokemon | null
 }
 
-const PokemonDetail = ({ pokemon, loading }: IProps) => {
+const PokemonDetail = ({ loading }: IProps) => {
+ const pokemon = useSelector(state => state.pokemons.pokemon)
+ const dispatch = useDispatch()
  if (loading) {
   return (
    <div className='grid place-content-center'>
@@ -16,6 +19,7 @@ const PokemonDetail = ({ pokemon, loading }: IProps) => {
   )
  }
  const { name, sprites, weight, height } = pokemon || {}
+
  return (
   <>
    {
@@ -27,6 +31,7 @@ const PokemonDetail = ({ pokemon, loading }: IProps) => {
        {weight && <Text className="mr-5" text={`Peso: ${weight}Kg`} />}
        {height && <Text text={`Altura: ${height}Cm`} />}
       </div>
+      <Button onClick={() => dispatch(addPokemonFavorite(pokemon))} textButton='AddFav' />
      </div>
     )
    }
