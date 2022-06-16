@@ -1,10 +1,11 @@
 interface IProps {
  textButton: string,
- onClick?: () => void
+ onClick?: () => void,
+ className?: string
 }
-const Button = ({ textButton, onClick }: IProps) => {
+const Button = ({ textButton, onClick, className = 'hover:bg-blue-500 border-blue-500' }: IProps) => {
  return (
-  <button className="g-transparent hover:bg-blue-500 text-white font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={onClick}>{textButton}</button>
+  <button className={`${className} bg-transparent  text-white font-semibold hover:text-white py-2 px-4 border  hover:border-transparent rounded`} onClick={onClick}>{textButton}</button>
  )
 }
 
