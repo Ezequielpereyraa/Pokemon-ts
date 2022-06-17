@@ -1,4 +1,5 @@
 export interface IPokemons {
+ spritesFront: string | undefined
  name: string,
  url: string
 }

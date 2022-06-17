@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { pokemonAdapters } from "@/adapters";
-import { IPokemons, IPokemon } from "@/models";
+import { IPokemons } from "@/models";
 import { useDispatch } from "react-redux";
 import { getPokemon, getPokemons, setLoading } from "../redux/pokemonSlice";
 import { useSelectorState } from "./useSelectorState";
@@ -24,7 +24,8 @@ const useFechtPokemons = () => {
  }
 
 
- const fetchDataPokemon = async ({ url, pokemonSelect }: { url: string, pokemonSelect: IPokemon }) => {
+ const fetchDataPokemon = async ({ url, pokemonSelect }: { url?: string, pokemonSelect?: IPokemons }) => {
+   if(!url || !pokemonSelect) return;
   try {
    if (!url && Object.entries(pokemonSelect).length) {
     dispatch(getPokemon(pokemonSelect))
