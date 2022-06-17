@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IPokemons } from "@/models";
 interface IinitialState {
- pokemonFavorite: IPokemons
+ pokemonFavorite: IPokemons[]
 }
 const initialState: IinitialState = {
  pokemonFavorite: []

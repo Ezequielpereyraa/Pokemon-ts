@@ -3,7 +3,6 @@ import Loader from '@/components/Loader'
 import Button from '@/components/Button'
 import { addPokemonFavorite, deletedPokemonFavorite } from '@/redux/pokemonFavoriteSlice'
 import { RootState } from '@/redux/store'
-import { IPokemon } from '@/models'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSelectorState } from '@/hooks/useSelectorState'
 
@@ -22,7 +21,7 @@ const PokemonDetail = () => {
     )
   }
   const { name, sprites, weight, height } = pokemon || {}
-  const hasFavorite = pokemonsFavorites.some((pokemon: IPokemon) => pokemon.name === name)
+  const hasFavorite = pokemonsFavorites.some((pokemon) => pokemon.name === name)
   const showBotton = pokemon && pokemon.name === 'Not! pokemon';
 
   return (
