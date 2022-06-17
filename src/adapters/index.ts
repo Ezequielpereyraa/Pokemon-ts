@@ -1,6 +1,4 @@
-import { IPokemons } from '@/models'
-
-export const pokemonAdapters = (data: IPokemons) => ({
+export const pokemonAdapters = (data: any) => ({
  name: data.name,
  sprites: data.sprites.versions["generation-v"]["black-white"].animated.front_default,
  spritesFront: data.sprites.front_default,
