@@ -4,12 +4,11 @@ import Button from '@/components/Button'
 import { addPokemonFavorite, deletedPokemonFavorite } from '@/redux/pokemonFavoriteSlice'
 import { RootState } from '@/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { useSelectorState } from '@/hooks/useSelectorState'
 
 
 const PokemonDetail = () => {
-  const pokemon = useSelectorState('pokemon')
-  const loading = useSelectorState('loading')
+  const pokemon = useSelector((state: RootState) => state.pokemons.pokemon)
+  const loading = useSelector((state: RootState) => state.pokemons.loading)
   const pokemonsFavorites = useSelector((state: RootState) => state.pokemonsFavorites.pokemonFavorite);
   const dispatch = useDispatch()
 
@@ -29,7 +28,7 @@ const PokemonDetail = () => {
       {
         pokemon && (
           <div className='text-center flex flex-col justify-center'>
-            <Text className='text-6xl capitalize' text={name} />
+            <Text className='text-6xl capitalize' text={name!} />
             <img className='w-32 h-32 mx-auto' src={sprites} alt={name} />
             <div className="flex justify-center m-4">
               {weight && <Text className="mr-5" text={`Peso: ${weight}Kg`} />}

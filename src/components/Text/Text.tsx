@@ -1,5 +1,5 @@
 interface IProps {
- text: string,
+ text: string | number,
  className?: string
 }
 const Text = ({ text, className }: IProps) => {

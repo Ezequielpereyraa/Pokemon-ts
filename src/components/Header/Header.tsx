@@ -7,14 +7,18 @@ const Header = () => {
  const { fetchDataPokemon } = useFechtPokemons()
  const location = useLocation();
  const isLocationFavorite = location?.pathname === '/favorites';
-
+ const addClass = isLocationFavorite ? 'justify-between px-20' : 'justify-evenly';
  return (
-  <div className="flex items-center justify-evenly bg-slate-800 h-14 mb-5">
+  <div className={`flex items-center  bg-slate-800 h-14  mb-5 ${addClass}`}>
+   <Text className='text-3xl font-bold text-center' text='Pokemons' />
    {
-    isLocationFavorite ? <NavLink to='/'>Go Home</NavLink> : <NavLink to='/favorites'>Go Favorites</NavLink>
+    isLocationFavorite ?
+     <NavLink to='/'>Go Home</NavLink>
+     : <>
+      <FormSearch fetchPokemon={fetchDataPokemon} />
+      <NavLink to='/favorites'>Go Favorites</NavLink>
+     </>
    }
-   <Text className="text-3xl font-bold text-center " text='Pokemons' />
-   <FormSearch fetchPokemon={fetchDataPokemon} />
   </div>
  )
 }

@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { pokemonAdapters } from "@/adapters";
-import { IPokemons } from "@/models";
-import { useDispatch } from "react-redux";
+import { IPokemon, IPokemons } from "@/models";
+import { useDispatch, useSelector } from "react-redux";
 import { getPokemon, getPokemons, setLoading } from "../redux/pokemonSlice";
-import { useSelectorState } from "./useSelectorState";
+import { RootState } from "@/redux/store";
 
 const useFechtPokemons = () => {
   const dispatch = useDispatch()
-  const page = useSelectorState('page')
+  const page = useSelector((state: RootState) => state.pokemons.page)
 
   const fetchPokemons = async () => {
     dispatch(setLoading(true))
@@ -24,7 +24,7 @@ const useFechtPokemons = () => {
   }
 
 
-  const fetchDataPokemon = async ({ url = '', pokemonSelect }: { url?: string, pokemonSelect?: IPokemons }) => {
+  const fetchDataPokemon = async ({ url = '', pokemonSelect }: { url?: string, pokemonSelect?: IPokemon }) => {
     if (!pokemonSelect) return;
     try {
       if (!url && Object.entries(pokemonSelect).length) {
@@ -39,6 +39,7 @@ const useFechtPokemons = () => {
         dispatch(setLoading(false))
       }, 1000);
     } catch (error) {
+      dispatch(setLoading(true))
       dispatch(getPokemon({
         name: "Not! pokemon",
         sprites: "https://i.pinimg.com/originals/b2/08/63/b2086351a03ed48cea85f1e4b468024b.gif"

@@ -1,13 +1,14 @@
 import { IPokemon, IPokemons } from "@/models"
 import Text from "@/components/Text"
 import useFechtPokemons from "@/hooks/useFechtPokemons"
-import { useSelectorState } from "@/hooks/useSelectorState"
+import { useSelector } from "react-redux"
+import { RootState } from "@/redux/store"
 
 
 const Pokemons = () => {
  const { fetchDataPokemon } = useFechtPokemons()
- const pokemons = useSelectorState('pokemons')
- const pokemon = useSelectorState('pokemon')
+ const pokemons = useSelector((state: RootState) => state.pokemons.pokemons)
+ const pokemon = useSelector((state: RootState) => state.pokemons.pokemon)
 
  const selectedPokemon = (name: string) => name === pokemon?.name
 

@@ -1,13 +1,13 @@
 import Button from "@/components/Button"
 import Text from "@/components/Text"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { decrementPage, incrementPage } from "@/redux/pokemonSlice"
-import { useSelectorState } from "@/hooks/useSelectorState"
+import { RootState } from "@/redux/store"
 
 
 const Pagination = () => {
  const dispatch = useDispatch()
- const page = useSelectorState('page')
+ const page = useSelector((state: RootState) => state.pokemons.page)
 
  return (
   <div className="flex justify-center my-5">
