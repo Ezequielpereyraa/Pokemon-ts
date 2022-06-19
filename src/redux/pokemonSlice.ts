@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { IPokemon, IPokemons } from "../models"
+import { IPokemon } from "../models"
 
 export interface IinitialState {
  pokemon: IPokemon | null,
- pokemons: IPokemons[],
+ pokemons: IPokemon[],
  page: number,
  loading: boolean,
 }

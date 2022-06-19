@@ -1,4 +1,4 @@
-import { IPokemons, IPokemon } from "@/models"
+import { IPokemon } from "@/models"
 import Text from "@/components/Text"
 import useFechtPokemons from "@/hooks/useFechtPokemons"
 import { useSelector } from "react-redux"
@@ -21,11 +21,10 @@ const Pokemons = () => {
    letterSpacing: '2px',
   }
  }
- console.log({ pokemons })
  return (
   <div className=' grid grid-cols-3 items-center'>
    {
-    !!pokemons.length && pokemons.map((pokemon: IPokemons) => (
+    !!pokemons.length && pokemons.map((pokemon: IPokemon) => (
      <div onClick={() => fetchDataPokemon({ pokemonSelect: pokemon })} style={stylesSelected(pokemon.name)} className='m-2 transition ease-in-out delay-150 capitalize font-light cursor-pointer hover:bg-sky-700' key={pokemon.name}>
       <Text className='text-2xl capitalize' text={pokemon.name} />
       <img className='w-20 h-24' src={pokemon.spritesFront} alt={pokemon.name} />

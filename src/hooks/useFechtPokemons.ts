@@ -24,7 +24,7 @@ const useFechtPokemons = () => {
   }
 
 
-  const fetchDataPokemon = async ({ url = '', pokemonSelect }: { url?: string, pokemonSelect?: IPokemons }) => {
+  const fetchDataPokemon = async ({ url = '', pokemonSelect }: { url?: string, pokemonSelect?: IPokemon }) => {
     if (!pokemonSelect) return;
     try {
       if (!url && Object.entries(pokemonSelect).length) {
