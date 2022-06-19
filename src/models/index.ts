@@ -1,13 +1,13 @@
 export interface IPokemons {
- spritesFront: string | undefined
+ imageStatic: string | undefined
  name: string,
  url: string
 }
 
 export interface IPokemon {
- sprites: string,
+ imageAnimated: string,
+ imageStatic: string,
  name: string,
- spritesFront: string,
  weight: number,
  height: number,
  baseExperiencia: number

@@ -11,35 +11,35 @@ const useFechtPokemons = () => {
   const page = useSelector((state: RootState) => state.pokemons.page)
 
   const fetchPokemons = async () => {
+    const URL = `https://pokeapi.co/api/v2/pokemon?offset=${page}0&limit=9`
     dispatch(setLoading(true))
-    const { data: { results } } = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${page}0&limit=9`);
+    const { data: { results } } = await axios.get(URL);
     const pokemons = await Promise.all(results.length && results.map(async (pokemon: IPokemons) => {
       const { data } = await axios.get(pokemon.url);
       return pokemonAdapters(data);
     }));
     dispatch(getPokemons(pokemons));
-    setTimeout(() => {
-      dispatch(setLoading(false))
-    }, 1000);
+    dispatch(setLoading(false))
   }
 
 
   const fetchDataPokemon = async ({ url = '', pokemonSelect }: { url?: string, pokemonSelect?: IPokemon }) => {
-    if (!pokemonSelect) return;
+    dispatch(setLoading(true))
     try {
-      if (!url && Object.entries(pokemonSelect).length) {
+      if (pokemonSelect) {
         dispatch(getPokemon(pokemonSelect))
         return setTimeout(() => {
           dispatch(setLoading(false))
         }, 1000);
       };
-      const { data } = await axios.get(url);
-      dispatch(getPokemon(pokemonAdapters(data)))
-      return setTimeout(() => {
-        dispatch(setLoading(false))
-      }, 1000);
+      if (url) {
+        const { data } = await axios.get(url);
+        dispatch(getPokemon(pokemonAdapters(data)))
+        return setTimeout(() => {
+          dispatch(setLoading(false))
+        }, 1000);
+      }
     } catch (error) {
-      dispatch(setLoading(true))
       dispatch(getPokemon({
         name: "Not! pokemon",
         sprites: "https://i.pinimg.com/originals/b2/08/63/b2086351a03ed48cea85f1e4b468024b.gif"
