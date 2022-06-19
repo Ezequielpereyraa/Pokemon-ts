@@ -1,4 +1,4 @@
-import { IPokemon, IPokemons } from "@/models"
+import { IPokemons, IPokemon } from "@/models"
 import Text from "@/components/Text"
 import useFechtPokemons from "@/hooks/useFechtPokemons"
 import { useSelector } from "react-redux"
@@ -21,7 +21,7 @@ const Pokemons = () => {
    letterSpacing: '2px',
   }
  }
-
+ console.log({ pokemons })
  return (
   <div className=' grid grid-cols-3 items-center'>
    {
