@@ -16,7 +16,7 @@ const PokemonsFavorites = () => {
   }
 
   return (
-    <div className="flex gap-5">
+    <div className="grid grid-cols-5 gap-5">
       {
         !!pokemonsFav.length && pokemonsFav.map((pokemon: IPokemon) => <Pokemon key={pokemon.name} pokemon={pokemon} />)
       }</div>
