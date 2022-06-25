@@ -11,7 +11,7 @@ export interface IinitialState {
 const initialState: IinitialState = {
  pokemon: null,
  pokemons: [],
- page: 0,
+ page: 1,
  loading: false
 }
 

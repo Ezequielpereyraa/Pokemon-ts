@@ -9,9 +9,8 @@ import { RootState } from "@/redux/store";
 const useFechtPokemons = () => {
   const dispatch = useDispatch()
   const page = useSelector((state: RootState) => state.pokemons.page)
-
   const fetchPokemons = async () => {
-    const URL = `https://pokeapi.co/api/v2/pokemon?offset=${page}0&limit=9`
+    const URL = `https://pokeapi.co/api/v2/pokemon?offset=${page}&limit=20`
     dispatch(setLoading(true))
     const { data: { results } } = await axios.get(URL);
     const pokemons = await Promise.all(results.length && results.map(async (pokemon: IPokemons) => {

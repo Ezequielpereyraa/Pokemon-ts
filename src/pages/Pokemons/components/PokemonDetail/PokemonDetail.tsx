@@ -1,6 +1,5 @@
 import Text from '@/components/Text'
 import Loader from '@/components/Loader'
-import Button from '@/components/Button'
 import { addPokemonFavorite, deletedPokemonFavorite } from '@/redux/pokemonFavoriteSlice'
 import { RootState } from '@/redux/store'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,12 +13,12 @@ const PokemonDetail = () => {
 
   if (loading && !pokemon) {
     return (
-      <div className='grid place-content-center'>
+      <div className='min-h-screen grid place-content-center'>
         <Loader loading={loading} />
       </div>
     )
   }
-  const { name, imageAnimated: sprites, weight, height } = pokemon || {}
+  const { name, imageAnimated: sprites, weight, height, species, ability, types } = pokemon || {}
   const hasFavorite = pokemonsFavorites.some((pokemon) => pokemon.name === name)
   const showBotton = pokemon && pokemon.name === 'Not! pokemon';
 
@@ -33,6 +32,25 @@ const PokemonDetail = () => {
             <div className="flex justify-center m-4">
               {weight && <Text className="mr-5" text={`Peso: ${weight}Kg`} />}
               {height && <Text text={`Altura: ${height}Cm`} />}
+            </div>
+            <div className="mx-auto">
+              <div>
+                <div className="flex justiy-start">
+                  {species && <Text className='capitalize' text={`Especie: ${species}`} />}
+                </div>
+                <div className="flex justify-start my-2">
+                  <Text text='Ability: ' />
+                  {
+                    ability?.length && ability.map(specie => <Text className='mx-2 capitalize' text={specie} />)
+                  }
+                </div>
+                <div className="flex justify-start">
+                  <Text text='Types:' />
+                  {
+                    types?.length && types.map(specie => <Text className='mx-2 capitalize' text={specie} />)
+                  }
+                </div>
+              </div>
             </div>
             <div className="absolute top-10 right-4">
               {!showBotton && (

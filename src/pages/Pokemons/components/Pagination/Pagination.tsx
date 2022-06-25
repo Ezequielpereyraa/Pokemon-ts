@@ -12,7 +12,7 @@ const Pagination = () => {
  return (
   <div className="flex justify-center my-5">
    <Button textButton='Prev' onClick={() => dispatch(decrementPage())} />
-   <Text className='text-2xl my-2 mx-4' text={page === 0 ? '1' : page + 1} />
+   <Text className='text-2xl my-2 mx-4' text={page} />
    <Button textButton='Next' onClick={() => dispatch(incrementPage())} />
   </div>
  )

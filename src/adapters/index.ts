@@ -5,4 +5,7 @@ export const pokemonAdapters = (data: any) => ({
  weight: data.weight,
  height: data.height,
  baseExperiencia: data.base_experience,
+ types: data.types && data.types.map((type: any) => type.type.name),
+ species: data.species.name,
+ ability: data.abilities && data.abilities.map((ab: any) => ab.ability.name)
 })

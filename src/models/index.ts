@@ -10,5 +10,8 @@ export interface IPokemon {
  name: string,
  weight: number,
  height: number,
- baseExperiencia: number
+ baseExperiencia: number,
+ types: string[],
+ species: string[],
+ ability: string[]
 }
